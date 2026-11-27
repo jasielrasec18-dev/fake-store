@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# Fake Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vitrine de produtos que consome a [Fake Store API](https://fakestoreapi.com). Projeto de prática de consumo de API REST com React e TypeScript: os produtos são buscados ao abrir a página e exibidos em uma grade de cards.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Busca dos produtos em `https://fakestoreapi.com/products` assim que a página carrega.
+- Mensagem de carregamento enquanto a requisição está em andamento.
+- Cards com imagem, título, preço, categoria e avaliação (nota e número de avaliações).
+- Grade responsiva que ajusta a quantidade de colunas à largura da tela.
+- Tipagem dos dados da API com interfaces TypeScript.
+- Erros de requisição registrados no console.
 
-## React Compiler
+## Tecnologias
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Tecnologia | Uso |
+| --- | --- |
+| React 19 | Interface e estado (`useState` e `useEffect`) |
+| TypeScript | Tipagem dos produtos e das avaliações |
+| Vite | Ambiente de desenvolvimento e build |
+| Fetch API | Requisição à Fake Store API |
+| ESLint | Padronização do código |
 
-## Expanding the ESLint configuration
+## Como rodar localmente
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Pré-requisitos
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js e npm
+- Conexão com a internet, já que os dados vêm da Fake Store API
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Passo a passo
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/jasielrasec18-dev/fake-store.git
+cd fake-store
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Abra o endereço exibido no terminal, normalmente [http://localhost:5173](http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Comando | Descrição |
+| --- | --- |
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Verifica os tipos e gera o build de produção |
+| `npm run preview` | Visualiza o build de produção localmente |
+| `npm run lint` | Executa o ESLint |
+
+## Estrutura do projeto
+
+```text
+src/
+  components/
+    Api.tsx     # Busca os produtos e renderiza a grade de cards
+  App.tsx       # Componente raiz
+  main.tsx      # Ponto de entrada da aplicação
+  index.css     # Estilos globais
 ```
+
+## Próximos passos
+
+- Exibir uma mensagem na tela quando a requisição falhar.
+- Ajustar a moeda dos preços: a API retorna valores em dólar, que hoje aparecem com "R$". Formatar com `Intl.NumberFormat` ou converter para reais.
+- Adicionar filtro por categoria e busca por nome.
+- Mover os estilos inline dos cards para CSS.
+
+## Autor
+
+Desenvolvido por **Jasiel Rasec** · [GitHub](https://github.com/jasielrasec18-dev)
